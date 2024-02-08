@@ -3,7 +3,7 @@
 🥳 Please join my patreon community https://patreon.com/camenduru <br />
 
 ### 🕸 Replicate
-https://replicate.com/camenduru/metavoice
+https://replicate.com/camenduru/lgm
 
 ### 🧬 Code
 https://github.com/3DTopia/LGM
