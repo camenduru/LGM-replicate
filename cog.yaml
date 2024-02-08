@@ -1,0 +1,17 @@
+build:
+  gpu: false
+  python_version: "3.10"
+  run:
+    - apt update -y && apt install -y software-properties-common python3-launchpadlib && apt update -y && add-apt-repository -y ppa:git-core/ppa && apt update -y
+    - apt install -y gcc g++ aria2 git git-lfs wget libgl1 libglib2.0-0 ffmpeg cmake libgtk2.0-0 libopenmpi-dev
+    - wget https://developer.download.nvidia.com/compute/cuda/12.1.0/local_installers/cuda_12.1.0_530.30.02_linux.run && sh cuda_12.1.0_530.30.02_linux.run --silent --toolkit
+    - pip install torch==2.1.0+cu121 torchvision==0.16.0+cu121 torchaudio==2.1.0+cu121 torchtext==0.16.0 torchdata==0.7.0 --extra-index-url https://download.pytorch.org/whl/cu121 -U
+    - pip install notebook pyngrok pickleshare ipywidgets imageio-ffmpeg pandas numpy==1.23.5 ninja
+    - pip install tyro diffusers dearpygui einops accelerate lpips pygltflib rembg[gpu,cli] trimesh kiui xatlas roma plyfile transformers
+    - pip install https://download.pytorch.org/whl/cu121/xformers-0.0.22.post7-cp310-cp310-manylinux2014_x86_64.whl
+    - sed -i 's/return caster.operator typename make_caster<T>::template cast_op_type<T>();/return caster;/' /usr/local/lib/python3.10/site-packages/torch/include/pybind11/cast.h
+    - git clone --recursive -b replicate https://github.com/camenduru/LGM-hf /content/LGM-hf
+    - aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/ashawkey/LGM/resolve/main/model.safetensors -d /content/LGM-hf/model -o model.safetensors
+    - pip install pydantic==1.9.2 -U
+    - pip install https://github.com/camenduru/LGM-replicate/releases/download/replicate/diff_gaussian_rasterization-0.0.0-cp310-cp310-linux_x86_64.whl
+predict: "/src/predict.py:Predictor"
