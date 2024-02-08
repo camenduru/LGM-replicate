@@ -19,5 +19,7 @@ https://huggingface.co/ashawkey/LGM
 
 ### 🖼 Output
 
+https://github.com/camenduru/LGM-replicate/assets/54370274/4c4666e1-648e-4cf3-b9b4-5923a0f96131
+
 ### 🏢 Sponsor
 https://replicate.com
